@@ -13,4 +13,4 @@ node_modules
 # Ignora archivos de configuración SASS
 .sass-cache
 
-/src/password.ts
+/src/datadb.ts
