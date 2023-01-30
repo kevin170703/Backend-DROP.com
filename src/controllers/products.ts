@@ -22,7 +22,7 @@ export const getProductsByName = (req: Request, res: Response) => {
         res.status(404).send({
           error: "El nombre de el producto introducido es incorrecto",
         });
-      else return res.json(product);
+      return res.json(product);
     })
     .catch((err) => {
       console.log(err);
