@@ -1,26 +1,32 @@
 import Product from "../models/Product";
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 
 export const getProducts = (_req: Request, res: Response) => {
   Product.find({})
     .then((result) => {
-      if (!result)
+      if (!result.length)
         return res.json({ msj: "La base de datos se ecuentra vacia" });
       return res.json(result);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      res.status(404).end();
+    });
 };
 
 export const getProductsByName = (req: Request, res: Response) => {
   const { name } = req.params;
   Product.find({ nameProduct: name.toLowerCase() })
     .then((product) => {
-      if (product) return res.json(product);
-      else res.status(404).end();
+      if (!product.length)
+        res.status(404).send({
+          error: "El nombre de el producto introducido es incorrecto",
+        });
+      else return res.json(product);
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).end();
+      res.status(404).end();
     });
 };
 
@@ -39,6 +45,7 @@ export const createProduct = (req: Request, res: Response) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(404).end();
     });
 };
 
@@ -64,10 +71,10 @@ export const deleteProduct = (req: Request, res: Response) => {
   const { id } = req.body;
   Product.findByIdAndDelete(id)
     .then(() => {
-      res.send(`El producto con la id ${id} fue eliminado`);
+      res.send(`El producto con la id ${id} fue eliminado correctamente`);
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).end;
+      res.status(404).end();
     });
 };
