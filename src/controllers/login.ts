@@ -9,15 +9,14 @@ export const login = async (req: Request, res: Response) => {
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.password);
 
-  if (!passwordCorrect)
+  if (!passwordCorrect || user === null)
     return res
       .status(401)
       .send({ error: "El usuario o contraseña incorrecto" });
 
-  if (user !== null)
-    return res.json({
-      userName: user.userName,
-      email: user.email,
-      products: user.products,
-    });
+  res.json({
+    userName: user.userName,
+    email: user.email,
+    products: user.products,
+  });
 };
