@@ -20,6 +20,8 @@ productSchema.set("toJSON", {
 
 const Product = model("Product", productSchema);
 
+export default Product;
+
 // Product.find({}).then((result) => {
 //   console.log(result);
 //   mongoose.connection.close();
@@ -41,5 +43,3 @@ const Product = model("Product", productSchema);
 //   .catch((err) => {
 //     console.log(err);
 //   });
-
-export default Product;
