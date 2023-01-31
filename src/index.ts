@@ -1,15 +1,17 @@
+import "dotenv/config";
 import "./db";
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 const app = express();
 import routes from "./routes/routes";
 import notFound from "./middleware/notFound";
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
+// middlwwares
 app.use(express.json());
 
+// rutas
 app.use(routes);
-
 app.use(notFound);
 
 app.listen(PORT, () => {
