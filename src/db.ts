@@ -6,7 +6,7 @@ if (conectionString) {
   mongoose
     .connect(conectionString)
     .then(() => {
-      console.log("databse ok");
+      console.log("Base de datos conectada correctamente");
     })
     .catch((err) => {
       console.log(err);
