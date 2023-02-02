@@ -53,9 +53,10 @@ export const createProduct = async (req: Request, res: Response) => {
     if (user !== null) {
       user.products = user.products.concat(savedProduct._id);
       await user.save();
+      res.send("El producto se creo correctamente");
+    } else {
+      res.status(404).send({ error: "Usuario nulo" });
     }
-
-    res.send("El producto se creo correctamente");
   } catch (error) {
     console.log(error);
     res.status(404).end();
