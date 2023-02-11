@@ -15,6 +15,7 @@ export const login = async (req: Request, res: Response) => {
       .send({ error: "El usuario o contraseña incorrecto" });
 
   res.json({
+    id: user.id,
     userName: user.userName,
     email: user.email,
     products: user.products,
