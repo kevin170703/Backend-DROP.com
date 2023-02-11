@@ -19,6 +19,25 @@ export const getProducts = async (_req: Request, res: Response) => {
   }
 };
 
+export const getProductsByIdUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const product = await Product.find();
+
+    const filterProducts = product.filter((element) => {
+      return element.user.toJSON() === id;
+    });
+
+    if (!filterProducts.length)
+      return res.json({ msj: "El usuario no cuenta con datos aun" });
+
+    return res.json(filterProducts);
+  } catch (error) {
+    console.log(error);
+    res.status(404).end();
+  }
+};
+
 export const getProductsByName = async (req: Request, res: Response) => {
   const { name } = req.params;
   try {
@@ -84,7 +103,7 @@ export const updataProduct = (req: Request, res: Response) => {
 };
 
 export const deleteProduct = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     await Product.findByIdAndDelete(id);
     res.send(`El producto con la id ${id} fue eliminado correctamente`);
