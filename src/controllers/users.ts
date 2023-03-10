@@ -4,11 +4,7 @@ import { Response, Request } from "express";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const users = await User.find({}).populate("products", {
-      nameProduct: 1,
-      stock: 1,
-      price: 1,
-    });
+    const users = await User.findAll();
     if (!users.length) res.json({ msj: "la base de datos se encuentra vacia" });
     res.status(202).json(users);
   } catch (error) {
@@ -20,12 +16,10 @@ export const getUsers = async (req: Request, res: Response) => {
 export const newUser = async (req: Request, res: Response) => {
   const { userName, email, password } = req.body;
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = new User({
+  const user = await User.create({
     userName,
     email,
     password: passwordHash,
   });
-
-  const savedUser = await user.save();
-  res.json(savedUser);
+  res.json(user);
 };
