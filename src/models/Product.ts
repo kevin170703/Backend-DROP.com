@@ -1,45 +1,25 @@
-import { Schema, model } from "mongoose";
+import { DataTypes } from "sequelize";
+import sequelize from "../db";
 
-const productSchema: Schema = new Schema({
-  nameProduct: String,
-  stock: Number,
-  price: Number,
+const Product = sequelize.define("Product", {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+  },
+  nameProduct: {
+    type: DataTypes.STRING,
+  },
+  stock: {
+    type: DataTypes.FLOAT,
+  },
+  price: {
+    type: DataTypes.FLOAT,
+  },
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+    type: DataTypes.STRING,
   },
 });
-
-productSchema.set("toJSON", {
-  transform: (document, returnendObject) => {
-    returnendObject.id = returnendObject._id;
-    delete returnendObject._id;
-    delete returnendObject.__v;
-  },
-});
-
-const Product = model("Product", productSchema);
 
 export default Product;
-
-// Product.find({}).then((result) => {
-//   console.log(result);
-//   mongoose.connection.close();
-// });
-
-// const product = new Product({
-//   nameProduct: "pan",
-//   stock: 2,
-//   price: 200,
-//   important: true,
-// });
-
-// product
-//   .save()
-//   .then((result) => {
-//     console.log(result);
-//     mongoose.connection.close();
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });

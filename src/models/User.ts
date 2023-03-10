@@ -1,26 +1,32 @@
-import { Schema, model } from "mongoose";
+import { type } from "os";
+import { DataTypes } from "sequelize";
+import sequelize from "../db";
 
-const userSchema: Schema = new Schema({
-  userName: String,
-  email: String,
-  password: String,
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Product",
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true,
     },
-  ],
-});
-
-userSchema.set("toJSON", {
-  transform: (document, returnendObject) => {
-    returnendObject.id = returnendObject._id;
-    delete returnendObject._id;
-    delete returnendObject.__v;
-    delete returnendObject.password;
+    userName: {
+      type: DataTypes.STRING,
+    },
+    email: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+    },
+    products: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+    },
   },
-});
-
-const User = model("User", userSchema);
+  {
+    timestamps: false,
+  }
+);
 
 export default User;
