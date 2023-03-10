@@ -1,5 +1,5 @@
 import "dotenv/config";
-import "./db";
+import sequelize from "./db";
 import cors from "cors";
 import express from "express";
 const app = express();
@@ -17,5 +17,7 @@ app.use(routes);
 app.use(notFound);
 
 app.listen(PORT, () => {
+  sequelize.sync({ force: true });
+  console.log("DB correctamente conectada");
   console.log(`Servidor iniciado en el puerto ${PORT}`);
 });

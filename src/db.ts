@@ -1,14 +1,8 @@
-import mongoose from "mongoose";
-const conectionString = process.env.DB_DATA;
+import { Sequelize } from "sequelize";
 
-// conexion a mongo
-if (conectionString) {
-  mongoose
-    .connect(conectionString)
-    .then(() => {
-      console.log("Base de datos conectada correctamente");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-} else console.log("conectionString invalido");
+const sequelize = new Sequelize("products", "postgres", "170703", {
+  host: "localhost",
+  dialect: "postgres",
+});
+
+export default sequelize;
