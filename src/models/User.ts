@@ -1,5 +1,10 @@
-import { type } from "os";
-import { DataTypes } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
 import sequelize from "../db";
 
 const User = sequelize.define(
