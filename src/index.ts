@@ -17,7 +17,7 @@ app.use(routes);
 app.use(notFound);
 
 app.listen(PORT, () => {
-  sequelize.sync({ force: true });
+  sequelize.sync({ force: false });
   console.log("DB correctamente conectada");
   console.log(`Servidor iniciado en el puerto ${PORT}`);
 });
