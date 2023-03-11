@@ -4,12 +4,11 @@ import bcrypt from "bcrypt";
 
 // export const login = async (req: Request, res: Response) => {
 //   const { userName, password } = req.body;
-//   const user = await User.findAll({
+//   const user = await User.findOne({
 //     where: {
 //       name: userName,
 //     },
 //   });
-//   res.json(user);
 
 // const passwordCorrect =
 //   user === null ? false : await bcrypt.compare(password, user.password);
