@@ -1,5 +1,5 @@
-import Product from "../models/Product";
-import User from "../models/User";
+import { Product } from "../models/Product";
+import { User } from "../models/User";
 import { Request, Response } from "express";
 
 export const getProducts = async (_req: Request, res: Response) => {
@@ -64,10 +64,10 @@ export const createProduct = async (req: Request, res: Response) => {
     if (!user) return res.status(404).send({ error: "El usuario no existe" });
 
     await Product.create({
-      nameProduct: nameProduct,
-      stock: stock,
-      price: price,
-      user: userId,
+      nameProduct,
+      stock,
+      price,
+      user: user.id,
     });
 
     res.send("El producto se creo correctamente");
