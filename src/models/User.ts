@@ -1,14 +1,24 @@
 import {
-  DataTypes,
   Model,
   InferAttributes,
   InferCreationAttributes,
+  DataTypes,
   CreationOptional,
 } from "sequelize";
 import sequelize from "../db";
 
-const User = sequelize.define(
-  "User",
+export class User extends Model<
+  InferAttributes<User>,
+  InferCreationAttributes<User>
+> {
+  declare id: CreationOptional<string>;
+  declare userName: string;
+  declare email: string;
+  declare password: string;
+  declare products: CreationOptional<Array<string>>;
+}
+
+User.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -30,8 +40,23 @@ const User = sequelize.define(
     },
   },
   {
-    timestamps: false,
+    sequelize,
+    tableName: "user",
   }
 );
 
-export default User;
+// interface UserAttributes {
+//   id: string;
+//   userName: string;
+//   email: string;
+//   password: string;
+//   products: Array<string>;
+// }
+
+// export class User extends Model<UserAttributes> {
+//   declare id: string;
+//   declare userName: string;
+//   declare email: string;
+//   declare password: string;
+//   declare products: Array<string>;
+// }
