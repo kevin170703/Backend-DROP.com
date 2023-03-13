@@ -8,7 +8,7 @@ import {
   getProductsByIdUser,
 } from "../controllers/products";
 import { newUser, getUsers } from "../controllers/users";
-// import { login } from "../controllers/login";
+import { login } from "../controllers/login";
 
 // rutas de productos
 router.get("/products", getProducts);
@@ -22,6 +22,6 @@ router.get("/users", getUsers);
 router.post("/users/create", newUser);
 
 // rutas de inicio de sesion
-// router.post("/login", login);
+router.post("/login", login);
 
 export default router;
