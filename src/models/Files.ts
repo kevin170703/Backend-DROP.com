@@ -7,18 +7,17 @@ import {
 } from "sequelize";
 import sequelize from "../db";
 
-export class Product extends Model<
-  InferAttributes<Product>,
-  InferCreationAttributes<Product>
+export class File extends Model<
+  InferAttributes<File>,
+  InferCreationAttributes<File>
 > {
   declare id: CreationOptional<string>;
-  declare nameProduct: string;
-  declare stock: number;
-  declare price: number;
+  declare name: string;
+  declare imageUrl: string;
   declare user: string;
 }
 
-Product.init(
+File.init(
   {
     id: {
       type: DataTypes.UUID,
@@ -26,14 +25,11 @@ Product.init(
       allowNull: false,
       primaryKey: true,
     },
-    nameProduct: {
+    name: {
       type: DataTypes.STRING,
     },
-    stock: {
-      type: DataTypes.FLOAT,
-    },
-    price: {
-      type: DataTypes.FLOAT,
+    imageUrl: {
+      type: DataTypes.STRING,
     },
     user: {
       type: DataTypes.STRING,
@@ -41,6 +37,6 @@ Product.init(
   },
   {
     sequelize,
-    tableName: "product",
+    tableName: "file",
   }
 );
