@@ -1,21 +1,13 @@
 import { Router } from "express";
 const router = Router();
-import {
-  getProducts,
-  getProductsByName,
-  createProduct,
-  deleteProduct,
-  getProductsByIdUser,
-} from "../controllers/products";
+
 import { newUser, getUsers } from "../controllers/users";
 import { login } from "../controllers/login";
+import { postFile, getFile } from "../controllers/images";
 
-// rutas de productos
-router.get("/products", getProducts);
-router.get("/productsByIdUser/:id", getProductsByIdUser);
-router.get("/products/:name", getProductsByName);
-router.post("/products", createProduct);
-router.delete("/products/:id", deleteProduct);
+// rutas de imagenes
+router.get("/files/:id", getFile);
+router.post("/upload", postFile);
 
 // // rutas de usuarios
 router.get("/users", getUsers);
