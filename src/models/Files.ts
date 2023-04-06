@@ -15,6 +15,7 @@ export class File extends Model<
   declare name: string;
   declare imageUrl: string;
   declare user: string;
+  declare size: string;
 }
 
 File.init(
@@ -29,6 +30,9 @@ File.init(
       type: DataTypes.STRING,
     },
     imageUrl: {
+      type: DataTypes.STRING,
+    },
+    size: {
       type: DataTypes.STRING,
     },
     user: {
