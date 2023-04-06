@@ -14,13 +14,14 @@ export const getFile = async (req: Request, res: Response) => {
 };
 
 export const postFile = async (req: Request, res: Response) => {
-  const { image, imageName, userId } = req.body;
+  const { image, imageName, userId, sizeImage } = req.body;
   console.log("llegue");
   try {
     await File.create({
       name: imageName,
       imageUrl: image,
       user: userId,
+      size: sizeImage,
     });
     res.send({ msj: "Imagen cargada correactamente" });
   } catch (error) {
