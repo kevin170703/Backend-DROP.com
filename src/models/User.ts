@@ -15,7 +15,7 @@ export class User extends Model<
   declare userName: string;
   declare email: string;
   declare password: string;
-  declare products: CreationOptional<Array<string>>;
+  declare files: CreationOptional<Array<string>>;
 }
 
 User.init(
@@ -35,7 +35,7 @@ User.init(
     password: {
       type: DataTypes.STRING,
     },
-    products: {
+    files: {
       type: DataTypes.ARRAY(DataTypes.STRING),
     },
   },
