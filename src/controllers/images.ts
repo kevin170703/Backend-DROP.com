@@ -1,13 +1,5 @@
 import { File } from "../models/Files";
 import { Request, Response } from "express";
-import { fileURLToPath } from "url";
-const cloudinary = require("cloudinary").v2;
-
-cloudinary.config({
-  cloud_name: "dwnptvxe5",
-  api_key: "223422247246345",
-  api_secret: "CSUtXk5x13w2NMt2my3PGIJloVI",
-});
 
 export const getFile = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -22,13 +14,12 @@ export const getFile = async (req: Request, res: Response) => {
 };
 
 export const postFile = async (req: Request, res: Response) => {
-  const { image, userId } = req.body;
+  const { image, imageName, userId } = req.body;
+  console.log("llegue");
   try {
-    const imageCloud = cloudinary.uploader.upload(image);
-    const data = await imageCloud;
     await File.create({
-      name: data.public_id,
-      imageUrl: data.secure_url,
+      name: imageName,
+      imageUrl: image,
       user: userId,
     });
     res.send({ msj: "Imagen cargada correactamente" });
