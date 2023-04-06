@@ -28,6 +28,6 @@ export const login = async (req: Request, res: Response) => {
     id: user.id,
     userName: user.userName,
     email: user.email,
-    products: user.products,
+    files: user.files,
   });
 };
